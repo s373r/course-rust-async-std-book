@@ -16,6 +16,9 @@ Status: 🚧 `[work in progress]`
   - [📝 1.1. Welcome to async-std!](https://book.async.rs/overview/async-std.html)
   - [📝 1.2. std::future and futures-rs](https://book.async.rs/overview/std-and-library-futures.html)
   - [📝 1.3. Stability guarantees](https://book.async.rs/overview/stability-guarantees.html)
+- [📝 2. Async concepts using async-std](https://book.async.rs/concepts.html)
+  - [📝 2.1. Futures](https://book.async.rs/concepts/futures.html)
+  - [✏️ 2.2. Tasks](02_concepts/src/main.rs)
 
 ## Notes
 
