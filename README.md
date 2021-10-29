@@ -29,6 +29,9 @@ Status: 🚧 `[work in progress]`
   - 3.7. Clean Shutdown
   - 3.8. Handling Disconnection
   - [✏️ 3.9. Implementing a Client](03_chat_client/src/main.rs)
+- [📝 4. Async Patterns](https://book.async.rs/patterns.html)
+  - [📝 4.1. Collected Small Patterns](https://book.async.rs/patterns/small-patterns.html)
+  - [📝 4.2. Production-Ready Accept Loop](https://book.async.rs/patterns/accept-loop.html)
 
 ## Notes
 
