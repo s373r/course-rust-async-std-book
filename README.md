@@ -34,6 +34,7 @@ Status: 🚧 `[work in progress]`
   - [📝 4.2. Production-Ready Accept Loop](https://book.async.rs/patterns/accept-loop.html)
 - [📝 5. Security practices](https://book.async.rs/security/index.html)
   - [📝 5.1. Security Disclosures and Policy](https://book.async.rs/security/policy.html)
+- [📝 6. Glossary](https://book.async.rs/security/index.html)
 
 ## Notes
 
