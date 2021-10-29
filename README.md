@@ -19,6 +19,16 @@ Status: 🚧 `[work in progress]`
 - [📝 2. Async concepts using async-std](https://book.async.rs/concepts.html)
   - [📝 2.1. Futures](https://book.async.rs/concepts/futures.html)
   - [✏️ 2.2. Tasks](02_concepts/src/main.rs)
+- [✏️ 3. Tutorial: Implementing a chat](03_chat/src/main.rs)
+  - 3.1. Specification and Getting started
+  - 3.2. Writing an Accept Loop
+  - 3.3. Receiving Messages
+  - 3.4. Sending Messages
+  - 3.5. Connecting Readers and Writers
+  - 3.6. All Together
+  - 3.7. Clean Shutdown
+  - 3.8. Handling Disconnection
+  - [✏️ 3.9. Implementing a Client](03_chat_client/src/main.rs)
 
 ## Notes
 
