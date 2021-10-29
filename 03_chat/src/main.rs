@@ -52,6 +52,7 @@ enum Event {
 }
 
 async fn broker_loop(mut events: Receiver<Event>) -> Result<()> {
+    let mut writers = Vec::new();
     let mut peers: HashMap<String, Sender<String>> = HashMap::new();
 
     while let Some(event) = events.next().await {
@@ -69,12 +70,22 @@ async fn broker_loop(mut events: Receiver<Event>) -> Result<()> {
                 Entry::Occupied(..) => (),
                 Entry::Vacant(entry) => {
                     let (client_sender, client_receiver) = mpsc::unbounded();
+
                     entry.insert(client_sender);
 
-                    spawn_and_log_error(connection_writer_loop(client_receiver, stream));
+                    let handle =
+                        spawn_and_log_error(connection_writer_loop(client_receiver, stream));
+
+                    writers.push(handle);
                 }
             },
         }
+    }
+
+    drop(peers);
+
+    for writer in writers {
+        writer.await;
     }
 
     Ok(())
@@ -108,7 +119,7 @@ async fn accept_loop(addr: impl ToSocketAddrs) -> Result<()> {
     let listener = TcpListener::bind(addr).await?;
 
     let (broker_sender, broker_receiver) = mpsc::unbounded();
-    let _broker_handle = task::spawn(broker_loop(broker_receiver));
+    let broker_handle = task::spawn(broker_loop(broker_receiver));
     let mut incoming = listener.incoming();
 
     while let Some(stream) = incoming.next().await {
@@ -116,6 +127,9 @@ async fn accept_loop(addr: impl ToSocketAddrs) -> Result<()> {
         println!("Accepting from: {}", stream.peer_addr()?);
         spawn_and_log_error(connection_loop(broker_sender.clone(), stream));
     }
+
+    drop(broker_sender);
+    broker_handle.await?;
 
     Ok(())
 }
