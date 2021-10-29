@@ -2,7 +2,9 @@
 
 Course link: https://book.async.rs/overview/async-std.html
 
-Status: 🚧 `[work in progress]`
+Status: ✅*
+
+(* - Some pages are under construction, need to come back a bit later)
 
 ### Index legend
 
