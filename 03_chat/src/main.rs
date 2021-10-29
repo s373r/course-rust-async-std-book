@@ -26,8 +26,27 @@ use async_std::{
     prelude::*,
     task,
 };
+use futures::channel::mpsc;
+use futures::sink::SinkExt;
+use std::sync::Arc;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
+
+type Sender<T> = mpsc::UnboundedSender<T>;
+type Receiver<T> = mpsc::UnboundedReceiver<T>;
+
+async fn connection_writer_loop(
+    mut messages: Receiver<String>,
+    stream: Arc<TcpStream>,
+) -> Result<()> {
+    let mut stream = &*stream;
+
+    while let Some(msg) = messages.next().await {
+        stream.write_all(msg.as_bytes()).await?;
+    }
+
+    Ok(())
+}
 
 fn spawn_and_log_error<F>(fut: F) -> task::JoinHandle<()>
 where
